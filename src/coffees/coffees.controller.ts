@@ -6,7 +6,7 @@ import {
     Param,
     Patch,
     Post,
-    Query,
+    // Query
 } from '@nestjs/common';
 import { CoffeesService } from './coffees.service';
 import { CreateCoffeeDto } from './dto/create-coffee.dto';
@@ -23,8 +23,8 @@ export class CoffeesController {
     }
 
     @Get(':id')
-    findOne(@Param('id') id: string) {
-        return this.coffeesService.findOne(id);
+    findOne(@Param('id') id: number) {
+        return this.coffeesService.findOne('' + id);
     }
 
     @Post()
