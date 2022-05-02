@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto';
-import { Event } from 'src/events/entities/event.entity';
+import { Event } from '../events/entities/event.entity';
 import { Connection, Repository } from 'typeorm';
 import { CreateCoffeeDto } from './dto/create-coffee.dto';
 import { UpdateCoffeeDto } from './dto/update-coffee.dto';
@@ -39,7 +39,9 @@ export class CoffeesService {
 
     async create(createCoffeeDto: CreateCoffeeDto) {
         const flavors = await Promise.all(
-            createCoffeeDto.flavors.map(name => this.preloadFlavorByName(name)),
+            createCoffeeDto.flavors.map((name) =>
+                this.preloadFlavorByName(name),
+            ),
         );
 
         const coffee = this.coffeeRepository.create({
@@ -54,7 +56,9 @@ export class CoffeesService {
         const flavors =
             updateCoffeeDto.flavors &&
             (await Promise.all(
-                updateCoffeeDto.flavors.map(name => this.preloadFlavorByName(name)),
+                updateCoffeeDto.flavors.map((name) =>
+                    this.preloadFlavorByName(name),
+                ),
             ));
 
         const coffee = await this.coffeeRepository.preload({
