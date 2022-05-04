@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  mongo:
+    image: mongo
+    container_name: iluvcoffee-mongo
+    hostname: iluvcoffee-mongo
+    restart: always
+    environment:
+      # MONGO_INITDB_ROOT_USERNAME: ${MONGO_USER:-mongo}
+      # MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD:-mongo}
+      MONGODB_DATABASE: nest-course
+    ports:
+      - "27017:27017"
+    # volumes:
+    #   - ./data/mongo:/data/db
